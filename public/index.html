@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Fira Sans", sans-serif;
+            margin: 20px;
+            background-color: rgb(29, 77, 99);
+            width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-family: "Fira Sans", sans-serif;
+            font-size: 25px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 70%;
+            height: 30px;
+        }
+        form {
+            display: flex;
+            justify-content: space-evenly;
+            margin-bottom: 20px;
+        }
+        form > button {
+            width: 100px;
+            height: 50px;
+            font-size: large;
+            border-radius: 10px;
+        }
+        button {
+            font: inherit;
+            background-color: #f0f0f0;
+            border: 0;
+            color: #242424;
+            border-radius: 0.5em;
+            font-size: 1rem;
+            padding: 0.375em 1em;
+            font-weight: 400;
+            text-shadow: 0 0.0625em 0 #fff;
+            transition: 0.15s ease;
+        }  
+        button:active, button:hover {
+            translate: 0 0.225em;
+            cursor: pointer;
+}
+        
+        .task {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        .task.completed .text {
+            text-decoration: line-through;
+        }
+        .task .text {
+            flex-grow: 1;
+        }
+        .task button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>What's to be done today?</h1>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="New task" required>
+        <button type="submit">Add</button>
+    </form>
+    <ul id="task-list"></ul>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+body {
+    font-family: "Fira Sans", sans-serif;
+    background-color: rgb(29, 77, 99);
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    font-weight: 200;
+    font-size: 3rem;
+}
+
+input {
+    padding: 10px;
+    font-family: "Fira Sans", sans-serif;
+    font-size: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 70%;
+    height: 30px;
+}
+
+form {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+}
+
+form > button {
+    width: 100px;
+    height: 50px;
+    font-size: large;
+    border-radius: 10px;
+}
+
+button {
+    font: inherit;
+    background-color: #f0f0f0;
+    border: 0;
+    color: #242424;
+    border-radius: 0.5em;
+    font-size: 1rem;
+    padding: 0.375em 1em;
+    font-weight: 400;
+    text-shadow: 0 0.0625em 0 #fff;
+    transition: 0.05s ease;
+}  
+
+button:active, button:hover {
+    translate: 0 0.225em;
+    cursor: pointer;
+}
+
+#task-list {
+    list-style-type: none;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.task {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    color: white;
+
+}
+
+.task.completed .text {
+    text-decoration: line-through;
+}
+
+.task .text {
+    flex-grow: 1;
+}
+
+.task button {
+    margin-left: 10px;
+}

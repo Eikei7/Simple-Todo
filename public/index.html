@@ -8,12 +8,15 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
 </head>
 <body>
-    <h1>What's to be done today?</h1>
-    <form id="task-form">
-        <input type="text" id="task-input" placeholder="New task" required>
-        <button type="submit">Add</button>
-    </form>
-    <ul id="task-list"></ul>
+    <div class="container">
+        <h1>What's to be done today?</h1>
+        <form id="task-form">
+            <input type="text" id="task-input" placeholder="New task" required>
+            <button type="submit">Add</button>
+        </form>
+        <div id="error-container"></div>
+        <ul id="task-list"></ul>
+    </div>
     <script src="app.js"></script>
 </body>
 </html>

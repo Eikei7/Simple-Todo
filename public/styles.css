@@ -220,3 +220,21 @@ footer {
     font-size: 1.1rem;
     margin-top: auto;
     }
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.controls button {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 120px;
+}
+
+#import-input {
+    display: none;
+}

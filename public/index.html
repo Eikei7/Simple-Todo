@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:100,200,300,regular,500,600" rel="stylesheet" />
 </head>
@@ -14,9 +15,13 @@
             <input type="text" id="task-input" placeholder="New task" required>
             <button type="submit">Add</button>
         </form>
+        <div class="controls">
+            <button id="backup-btn">Backup Tasks</button>
+            <button id="import-btn">Import Tasks</button>
+        </div>
+        <input type="file" id="import-input" accept=".json">
         <div id="error-container"></div>
         <ul id="task-list"></ul>
-        
     </div>
     <footer>
         Made by <a href="https://frontend-erik.netlify.app/" target="_blank" rel="noopener noreferrer">Erik Karlsson</a>
@@ -27,6 +32,9 @@
         const taskInput = document.getElementById('task-input');
         const taskList = document.getElementById('task-list');
         const errorContainer = document.getElementById('error-container');
+        const backupBtn = document.getElementById('backup-btn');
+        const importBtn = document.getElementById('import-btn');
+        const importInput = document.getElementById('import-input');
 
         let tasks = [];
 
@@ -96,7 +104,7 @@
             taskList.appendChild(li);
         };
 
-        taskForm.onsubmit = async (e) => {
+        taskForm.onsubmit = (e) => {
             e.preventDefault();
             const taskText = taskInput.value.trim();
             
@@ -133,6 +141,60 @@
             saveTasks();
             renderTasks();
         };
+
+        const backupTasks = () => {
+            try {
+                const dataStr = JSON.stringify(tasks, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `tasks-backup-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error backing up tasks:', error);
+                showError('Error creating backup. Please try again.');
+            }
+        };
+
+        const importTasks = () => {
+            importInput.click();
+        };
+
+        importInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const imported = JSON.parse(event.target.result);
+                    
+                    if (!Array.isArray(imported)) {
+                        showError('Invalid file format. Please import a valid tasks backup.');
+                        return;
+                    }
+
+                    if (confirm(`Import ${imported.length} task(s)? This will replace your current tasks.`)) {
+                        tasks = imported;
+                        saveTasks();
+                        renderTasks();
+                        showError('Tasks imported successfully!');
+                    }
+                } catch (error) {
+                    console.error('Error importing tasks:', error);
+                    showError('Error importing tasks. Please ensure the file is valid.');
+                }
+            };
+            reader.readAsText(file);
+            importInput.value = '';
+        });
+
+        backupBtn.addEventListener('click', backupTasks);
+        importBtn.addEventListener('click', importTasks);
 
         // Load tasks on page load
         loadTasks();

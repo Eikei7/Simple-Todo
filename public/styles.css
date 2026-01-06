@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Google+Sans:regular,500,600,700,italic,500italic,600italic,700italic);
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: "Fira Sans", sans-serif;
+    font-family: "Google Sans", sans-serif;
     background: linear-gradient(135deg, #1d4d63 0%, #0f2f3f 100%);
     min-height: 100vh;
     padding: 20px;

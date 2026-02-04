@@ -1,152 +1,83 @@
 @import url(https://fonts.googleapis.com/css?family=Google+Sans:regular,500,600,700,italic,500italic,600italic,700italic);
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body {
-    font-family: "Google Sans", sans-serif;
-    background: linear-gradient(135deg, #1d4d63 0%, #0f2f3f 100%);
-    min-height: 100vh;
-    padding: 20px;
+#import-input {
+    display: none;
+}
+
+#task-list {
     display: flex;
     flex-direction: column;
-}
-
-a {
-    color: #ffffff;
-    text-decoration: none;
+    gap: 12px;
+    list-style: none;
 }
 
 .container {
-    width: 100%;
-    max-width: 600px;
-    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
-    padding: 40px 30px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
+    max-width: 600px;
+    padding: 40px 30px;
+    width: 100%;
 }
 
-h1 {
-    color: white;
-    text-align: center;
-    font-weight: 200;
-    font-size: 3rem;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-form {
+.controls {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-input {
+.controls button {
     flex: 1;
-    padding: 12px 16px;
-    font-family: inherit;
-    font-size: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    min-width: 120px;
+    padding: 10px 16px;
+}
+
+.empty-state {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.5);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    transition: all 0.3s ease;
+    color: #ffcdd2;
+    font-size: 14px;
+    margin-bottom: 20px;
+    padding: 12px;
 }
 
-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-input:focus {
-    outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-form > button {
-    padding: 12px 28px;
-    font-size: 16px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-button {
-    font: inherit;
-    background: linear-gradient(135deg, #4fc3f7 0%, #2196f3 100%);
-    border: none;
-    color: white;
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-shadow: none;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
-}
-
-button:active {
-    transform: translateY(0);
-}
-
-button.delete {
-    background: linear-gradient(135deg, #ef5350 0%, #e53935 100%);
-    padding: 6px 12px;
-    font-size: 0.85rem;
-}
-
-button.delete:hover {
-    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-}
-
-#task-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.loading {
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    padding: 20px;
+    text-align: center;
 }
 
 .task {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
     align-items: center;
-    gap: 12px;
-    color: white;
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.task:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.2);
-}
-
-.task.completed {
-    opacity: 0.6;
-}
-
-.task.completed .text {
-    text-decoration: line-through;
-    color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    color: white;
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
 }
 
 .task .text {
@@ -155,33 +86,128 @@ button:disabled {
     word-break: break-word;
 }
 
+.task.completed {
+    opacity: 0.6;
+}
+
+.task.completed .text {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: line-through;
+}
+
 .task-actions {
     display: flex;
     gap: 8px;
 }
 
-.loading {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
+.task:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+body {
+    background: linear-gradient(135deg, #1d4d63 0%, #0f2f3f 100%);
+    display: flex;
+    flex-direction: column;
+    font-family: "Google Sans", sans-serif;
+    min-height: 100vh;
     padding: 20px;
-    font-style: italic;
 }
 
-.error {
-    background: rgba(244, 67, 54, 0.2);
-    border: 1px solid rgba(244, 67, 54, 0.5);
-    color: #ffcdd2;
-    padding: 12px;
+button {
+    background: linear-gradient(135deg, #4fc3f7 0%, #2196f3 100%);
+    border: none;
     border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    text-shadow: none;
+    transition: all 0.3s ease;
 }
 
-.empty-state {
+button.delete {
+    background: linear-gradient(135deg, #ef5350 0%, #e53935 100%);
+    font-size: 0.85rem;
+    padding: 6px 12px;
+}
+
+button.delete:hover {
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+
+button:hover {
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+    transform: translateY(-2px);
+}
+
+footer {
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: auto;
+    padding: 20px;
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
-    padding: 40px 20px;
-    font-size: 18px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+form > button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 28px;
+    white-space: nowrap;
+}
+
+h1 {
+    color: white;
+    font-size: 3rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    flex: 1;
+    font-family: inherit;
+    font-size: 16px;
+    padding: 12px 16px;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    outline: none;
 }
 
 @media (max-width: 600px) {
@@ -210,33 +236,7 @@ button:disabled {
     }
 
     .task-actions {
-        width: 100%;
         justify-content: flex-end;
+        width: 100%;
     }
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-size: 1.1rem;
-    margin-top: auto;
-    }
-
-.controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.controls button {
-    padding: 10px 16px;
-    font-size: 0.9rem;
-    flex: 1;
-    min-width: 120px;
-}
-
-#import-input {
-    display: none;
 }

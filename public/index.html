@@ -26,6 +26,22 @@
         Made by <a href="https://frontend-erik.se/" target="_blank" rel="noopener noreferrer">Erik Karlsson</a>
     </footer>
     <script>
+        const GREETINGS = [
+    "What's to be done today?",
+    "What's on your plate today?",
+    "Ready to tackle something?",
+    "What needs doing?",
+    "Let's get things done!",
+    "What's the plan for today?",
+    "Time to be productive!",
+    "What's next on the list?",
+];
+
+const randomizeGreeting = () => {
+    const h1 = document.querySelector('h1');
+    h1.textContent = GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+};
+
         const STORAGE_KEY = 'tasks';
 const taskForm = document.getElementById('task-form');
 const taskInput = document.getElementById('task-input');
@@ -193,6 +209,7 @@ importInput.addEventListener('change', (e) => {
 backupBtn.addEventListener('click', backupTasks);
 importBtn.addEventListener('click', importTasks);
 
+randomizeGreeting();
 loadTasks();
     </script>
 </body>
